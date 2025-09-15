@@ -13,7 +13,7 @@ An interactive dashboard for tracking store performance in league table format w
 
 ## View Dashboard
 
-**🔗 [View Live Dashboard](https://yourusername.github.io/your-repo-name/)**
+**🔗 [View Live Dashboard](https://gadgetmanuk.github.io/store-league-dashboard/)**
 
 ## Current Data
 
@@ -25,7 +25,7 @@ An interactive dashboard for tracking store performance in league table format w
 ## Admin Access
 
 For admin features, append `?admin=1` to the URL:
-`https://yourusername.github.io/your-repo-name/?admin=1`
+`https://gadgetmanuk.github.io/store-league-dashboard/?admin=1`
 
 ## Local Development
 
