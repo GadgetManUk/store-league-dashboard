@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store League Table Dashboard v2.0</title>
+    <title>Store League Table Dashboard v2.1</title>
     <style>
         :root {
             --primary-color: #007AFF;
@@ -22,6 +22,7 @@
             --transition: all 0.3s ease;
         }
 
+        /* Original styles remain the same */
         * {
             margin: 0;
             padding: 0;
@@ -65,32 +66,6 @@
             background-clip: text;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .incentive-image {
-            max-width: 200px;
-            max-height: 120px;
-            width: auto;
-            height: auto;
-            margin-left: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: var(--transition);
-        }
-
-        .incentive-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-        }
-
-        .version-badge {
-            display: none; /* Hidden - replaced with image */
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
         }
 
         .subtitle {
@@ -184,24 +159,6 @@
             overflow: hidden;
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
-            transform: translate(-50%, -50%);
-        }
-
-        .btn:hover::before {
-            width: 200%;
-            height: 200%;
-        }
-
         .btn-primary {
             background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
             color: white;
@@ -227,146 +184,13 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            padding: 30px;
+        /* Movement Styles */
+        .movement-cell {
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--info-color));
-        }
-
-        .stat-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            opacity: 0.1;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-
-        .stat-value {
-            font-size: 2.8em;
             font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
+            width: 100px;
         }
 
-        .stat-label {
-            font-size: 1em;
-            color: var(--light-text);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Content Grid */
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .content-section {
-            padding: 25px;
-        }
-
-        .section-title {
-            font-size: 1.4em;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--dark-text);
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title::before {
-            content: attr(data-icon);
-            font-size: 1.2em;
-        }
-
-        /* Store Items */
-        .store-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .store-item:hover {
-            background: var(--light-bg);
-            padding-left: 10px;
-            border-radius: 8px;
-        }
-
-        .store-item:last-child {
-            border-bottom: none;
-        }
-
-        .store-rank {
-            font-weight: 800;
-            font-size: 1.2em;
-            color: var(--primary-color);
-            min-width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 122, 255, 0.1);
-            border-radius: 50%;
-            margin-right: 15px;
-        }
-
-        .store-name {
-            flex: 1;
-            font-weight: 600;
-            font-size: 1.1em;
-        }
-
-        .store-participation {
-            font-size: 1em;
-            color: var(--light-text);
-            font-weight: 700;
-            background: var(--light-bg);
-            padding: 5px 12px;
-            border-radius: 20px;
-            margin-right: 10px;
-        }
-
-        .store-movement {
-            font-size: 1.2em;
-            font-weight: 800;
-            min-width: 60px;
-            text-align: center;
-            padding: 5px 10px;
-            border-radius: 20px;
-        }
-
-        /* Movement Colors */
         .movement-up {
             color: var(--success-color);
             background: rgba(40, 167, 69, 0.1);
@@ -377,22 +201,12 @@
             background: rgba(220, 53, 69, 0.1);
         }
 
-        .movement-new {
-            color: var(--info-color);
-            background: rgba(23, 162, 184, 0.1);
-        }
-
         .movement-same {
             color: var(--light-text);
             background: var(--light-bg);
         }
 
         /* Table Styles */
-        .table-section {
-            padding: 25px;
-            overflow-x: auto;
-        }
-
         .league-table {
             width: 100%;
             border-collapse: collapse;
@@ -426,146 +240,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .rank-cell {
-            font-weight: 800;
-            text-align: center;
-            width: 80px;
-            font-size: 1.1em;
-            color: var(--primary-color);
-        }
-
-        .area-cell {
-            text-align: center;
-            font-weight: 600;
-            width: 90px;
-            font-size: 0.9em;
-            color: var(--info-color);
-        }
-
-        .participation-cell {
-            text-align: center;
-            font-weight: 700;
-            width: 120px;
-        }
-
-        .movement-cell {
-            text-align: center;
-            font-weight: 800;
-            width: 100px;
-        }
-
-        /* Average Store and Below Average Highlighting */
-        .average-store {
-            background: linear-gradient(45deg, #fff3cd, #ffeaa7) !important;
-            font-weight: 700;
-            border-top: 3px solid var(--warning-color);
-            border-bottom: 3px solid var(--warning-color);
-        }
-
-        .average-store:hover {
-            background: linear-gradient(45deg, #fff3cd, #ffeaa7) !important;
-            transform: scale(1.02) !important;
-        }
-
-        .below-north-west-average {
-            background: rgba(255, 193, 7, 0.15) !important;
-            border-left: 4px solid #ff9800;
-        }
-
-        .below-north-west-average:hover {
-            background: rgba(255, 193, 7, 0.25) !important;
-        }
-
-        .below-north-average {
-            background: rgba(255, 193, 203, 0.4) !important;
-            border-left: 4px solid #e91e63;
-        }
-
-        .below-north-average:hover {
-            background: rgba(255, 193, 203, 0.6) !important;
-        }
-
-        .below-north-west-average .rank-cell {
-            background: #ff9800;
-            color: white;
-            border-radius: 50%;
-            border: 3px solid #ff9800;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            font-size: 1em;
-            font-weight: 800;
-        }
-
-        .below-north-average .rank-cell {
-            background: #e91e63;
-            color: white;
-            border-radius: 50%;
-            border: 3px solid #e91e63;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            font-size: 1em;
-            font-weight: 800;
-        }
-
-        /* Average divider line */
-        .average-divider {
-            position: relative;
-        }
-
-        .average-divider::after {
-            content: 'AVERAGE LINE';
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--warning-color);
-            color: #000;
-            padding: 4px 10px;
-            font-size: 0.7em;
-            font-weight: 800;
-            border-radius: 12px;
-            text-shadow: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        /* Admin Controls */
-        .admin-controls {
-            padding: 25px;
-            text-align: center;
-            display: none;
-            border-top: 3px solid var(--warning-color);
-            margin-bottom: 20px;
-        }
-
-        .admin-controls.show {
-            display: block;
-        }
-
-        .admin-notice {
-            background: linear-gradient(45deg, #d4edda, #c3e6cb);
-            border: 1px solid var(--success-color);
-            color: #155724;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 600;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
         /* Loading Animation */
         .loading {
             display: inline-block;
@@ -580,6 +254,22 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
         }
 
         /* Filter Section */
@@ -615,105 +305,49 @@
             transition: var(--transition);
         }
 
-        .filter-group select:focus,
-        .filter-group input:focus {
-            outline: none;
-            border-color: var(--primary-color);
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
         }
 
-        /* No Data State */
-        .no-data {
+        .stat-card {
+            padding: 30px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-value {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-label {
+            font-size: 1em;
             color: var(--light-text);
-            font-style: italic;
-            padding: 40px;
-            font-size: 1.1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .no-data::before {
-            content: '📊';
-            font-size: 3em;
-            display: block;
-            margin-bottom: 15px;
+        .admin-notice {
+            background: linear-gradient(45deg, #d4edda, #c3e6cb);
+            border: 1px solid var(--success-color);
+            color: #155724;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+            animation: slideIn 0.5s ease-out;
         }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .header h1 {
-                font-size: 2.2em;
-            }
-            
-            .incentive-image {
-                margin-left: 0;
-                margin-top: 20px;
-                max-width: 180px;
-                max-height: 100px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            
-            .content-grid {
-                gap: 15px;
-            }
-            
-            .filter-section {
-                flex-direction: column;
-                align-items: stretch;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .store-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .store-rank {
-                align-self: flex-start;
-            }
-        }
-
-        /* Dark Mode Support - DISABLED for better visibility */
-        /* @media (prefers-color-scheme: dark) {
-            :root {
-                --light-bg: #2c2c2e;
-                --dark-text: #ffffff;
-                --light-text: #8e8e93;
-                --border-color: #3a3a3c;
-            }
-            
-            body {
-                background: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 100%);
-            }
-            
-            .card {
-                background: #1c1c1e;
-                border: 1px solid var(--border-color);
-            }
-        } */
     </style>
 </head>
 <body>
@@ -723,68 +357,22 @@
                 <h1>Store League Table Dashboard</h1>
                 <p class="subtitle">Enhanced Performance Tracking & Analytics</p>
             </div>
-            <img src="dewalt_incentive.png" alt="DeWalt Incentive" class="incentive-image">
+            <img src="dewalt_incentive.png" alt="DeWalt Incentive" class="incentive-image" style="max-width: 200px;">
         </div>
 
         <!-- Admin Upload Section -->
         <div id="uploadSection" class="card upload-section">
-            <h2>📂 Upload CSV Data</h2>
+            <h2>📂 Upload Performance Data</h2>
             <p>Drag and drop your CSV file here or click to browse</p>
             <div class="file-input">
                 <label class="file-input-label">
                     <i>📄</i>
                     <span>Choose CSV File</span>
-                    <input type="file" id="csvFile" accept=".csv" />
+                    <input type="file" id="csvFile" accept=".csv,.json" />
                 </label>
             </div>
             <button class="btn btn-primary" onclick="uploadFile()">
                 📤 Upload & Process
-            </button>
-            
-            <!-- URL Loading Section -->
-            <div style="margin: 30px 0; padding: 20px; border-top: 2px dashed var(--border-color); border-radius: var(--border-radius);">
-                <h3 style="margin-bottom: 15px; color: var(--primary-color);">🌐 Load from URL</h3>
-                <p style="margin-bottom: 15px; color: var(--light-text);">Load JSON data directly from GitHub or any URL</p>
-                
-                <!-- Single URL Option -->
-                <div style="margin-bottom: 20px;">
-                    <h4 style="margin-bottom: 10px; font-size: 1em; color: var(--dark-text);">📄 Single File (Current Data Only)</h4>
-                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
-                        <input type="url" id="jsonUrl" placeholder="Enter GitHub raw JSON URL or leave empty for default" 
-                               style="flex: 1; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; font-size: 14px;" />
-                        <button class="btn btn-success" onclick="loadFromUrl()" style="white-space: nowrap;">
-                            🔗 Load Single File
-                        </button>
-                    </div>
-                    <small style="color: var(--light-text); font-style: italic;">
-                        💡 Default: https://raw.githubusercontent.com/paulhilton74/Leaguetabledata/main/league.json
-                    </small>
-                </div>
-                
-                <!-- Two URL Option -->
-                <div style="border-top: 1px solid var(--border-color); padding-top: 20px;">
-                    <h4 style="margin-bottom: 10px; font-size: 1em; color: var(--dark-text);">📊 Two Files (with Movement Data)</h4>
-                    <div style="margin-bottom: 10px;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: 500; color: var(--dark-text);">Previous Day Data:</label>
-                        <input type="url" id="previousDayUrl" placeholder="Enter previous day JSON URL" 
-                               style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; font-size: 14px;" />
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: 500; color: var(--dark-text);">Current Day Data:</label>
-                        <input type="url" id="currentDayUrl" placeholder="Enter current day JSON URL or leave empty for default" 
-                               style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; font-size: 14px;" />
-                    </div>
-                    <button class="btn btn-primary" onclick="loadTwoFiles()" style="width: 100%;">
-                        📈 Load Both Files & Calculate Movement
-                    </button>
-                    <small style="color: var(--light-text); font-style: italic; display: block; margin-top: 10px;">
-                        🎯 This will calculate movement between the two days automatically
-                    </small>
-                </div>
-            </div>
-            
-            <button class="btn btn-warning" onclick="toggleAdmin()">
-                ⚙️ Admin Controls
             </button>
         </div>
 
@@ -798,49 +386,6 @@
             <h2>🏆 League Table Dashboard</h2>
             <p>Loading latest store performance data...</p>
             <div class="loading"></div>
-        </div>
-
-        <!-- Admin Controls -->
-        <div id="adminControls" class="card admin-controls">
-            <h3>🛠️ Administrative Controls</h3>
-            <div style="margin-top: 20px;">
-                <button class="btn btn-danger" onclick="clearData()">
-                    🗑️ Clear All Data
-                </button>
-                <button class="btn btn-success" onclick="exportData()">
-                    📊 Export CSV
-                </button>
-                <button class="btn btn-primary" onclick="resetRankings()">
-                    🔄 Reset Rankings
-                </button>
-                <button class="btn btn-warning" onclick="showDataInfo()">
-                    ℹ️ Data Info
-                </button>
-                <button class="btn btn-primary" onclick="generateStandaloneVersion()">
-                    📧 Generate Standalone Version
-                </button>
-                <button class="btn btn-success" onclick="exportJSON()">
-                    📄 Export JSON Data
-                </button>
-                <button class="btn btn-primary" onclick="importJSON()">
-                    📁 Import JSON Data
-                </button>
-                <button class="btn btn-warning" onclick="forceRefreshFromUrl()">
-                    🔄 Force Refresh from URL
-                </button>
-                <button class="btn btn-info" onclick="quickRefresh()">
-                    ⚡ Quick Refresh
-                </button>
-                <button class="btn btn-primary" onclick="loadEmbeddedData()">
-                    📋 Load Embedded Data
-                </button>
-                <button class="btn btn-success" onclick="autoEmbedCurrentData()" style="background: linear-gradient(45deg, #28a745, #20c997); font-weight: bold;">
-                    🔧 Auto-Embed Current Data
-                </button>
-                <button class="btn btn-info" onclick="showEmbedInstructions()" style="background: linear-gradient(45deg, #17a2b8, #138496);">
-                    📝 Embed Instructions
-                </button>
-            </div>
         </div>
 
         <!-- Filter Section -->
@@ -902,39 +447,15 @@
                 </div>
             </div>
 
-            <!-- Content Sections -->
-            <div class="content-grid">
-                <div class="card content-section">
-                    <h3 class="section-title" data-icon="🥇">Top 5 Stores</h3>
-                    <div id="topStores">
-                        <div class="no-data">No data available</div>
-                    </div>
-                </div>
-
-                <div class="card content-section">
-                    <h3 class="section-title" data-icon="📉">Bottom 5 Stores</h3>
-                    <div id="bottomStores">
-                        <div class="no-data">No data available</div>
-                    </div>
-                </div>
-
-                <div class="card content-section">
-                    <h3 class="section-title" data-icon="🚀">Biggest Movers</h3>
-                    <div id="biggestMovers">
-                        <div class="no-data">No movement data available</div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Main League Table -->
             <div class="card table-section">
-                <h3 class="section-title" data-icon="📋">Complete League Table</h3>
+                <h3>League Table</h3>
                 <div style="overflow-x: auto;">
                     <table class="league-table" id="leagueTable">
                         <thead>
                             <tr>
                                 <th class="rank-cell">Rank</th>
-                                <th>Store Name</th>
+                                <th>Store</th>
                                 <th class="area-cell">Area</th>
                                 <th class="participation-cell">Participation %</th>
                                 <th class="movement-cell">Movement</th>
@@ -942,7 +463,7 @@
                         </thead>
                         <tbody id="tableBody">
                             <tr>
-                                <td colspan="5" class="no-data">Upload CSV data to view league table</td>
+                                <td colspan="5" style="text-align: center; padding: 20px;">Upload data to view league table</td>
                             </tr>
                         </tbody>
                     </table>
@@ -951,63 +472,69 @@
         </div>
     </div>
 
+    <!-- Include CSV Handler -->
+    <script src="csv-handler.js"></script>
+
+    <!-- Load Application Logic -->
     <script>
-        // Global Variables
         let allStoreData = [];
         let previousData = [];
         let currentData = [];
         let filteredData = [];
         let isAdminUser = false;
         let uploadHistory = [];
-        let availableAreas = [];
 
         // Initialize Application
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Initializing League Table Dashboard v2.0...');
+            console.log('🚀 Initializing League Table Dashboard v2.1...');
             checkAdminAccess();
             setupDragAndDrop();
-            
-            // Auto-load embedded data first
-            if (window.EMBEDDED_LEAGUE_DATA && window.EMBEDDED_LEAGUE_DATA.stores) {
-                console.log('🎯 Auto-loading embedded data...');
-                loadEmbeddedData(false); // false = don't show alert popup
-            } else {
-                // Fallback to saved data or demo data
-                loadSavedData().then(loaded => {
-                    if (!loaded) {
-                        console.log('📋 No saved data found, loading demo data...');
-                        loadDemoData();
-                    } else {
-                        console.log('✅ Saved data loaded successfully');
-                    }
-                }).catch(error => {
-                    console.error('Error during initialization:', error);
-                    console.log('📋 Loading demo data as fallback...');
-                    loadDemoData();
-                });
-            }
+            loadSavedData();
         });
 
-        // Admin Access Control
         function checkAdminAccess() {
             const urlParams = new URLSearchParams(window.location.search);
             isAdminUser = urlParams.get('admin') === '1';
             
-            console.log('🔧 Admin mode detected:', isAdminUser);
-            
             if (isAdminUser) {
                 document.getElementById('uploadSection').classList.add('show-admin');
                 document.getElementById('adminNotice').style.display = 'block';
-                console.log('✅ Admin controls enabled');
+                document.getElementById('adminControls').style.display = 'block';
             } else {
                 document.getElementById('userSection').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('userSection').style.display = 'none';
-                }, 1000);
             }
         }
 
-        // Drag and Drop Setup
+        function loadSavedData() {
+            const savedData = localStorage.getItem('leagueTableData');
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    allStoreData = data.stores || [];
+                    previousData = data.previousData || [];
+                    uploadHistory = data.uploadHistory || [];
+                    
+                    if (allStoreData.length > 0) {
+                        processData();
+                        return true;
+                    }
+                } catch (error) {
+                    console.error('Error loading saved data:', error);
+                }
+            }
+            return false;
+        }
+
+        function saveDataToStorage() {
+            const dataToSave = {
+                stores: allStoreData,
+                previousData,
+                uploadHistory,
+                lastUpdated: new Date().toISOString()
+            };
+            localStorage.setItem('leagueTableData', JSON.stringify(dataToSave));
+        }
+
         function setupDragAndDrop() {
             const uploadSection = document.getElementById('uploadSection');
             const fileInput = document.getElementById('csvFile');
@@ -1033,1001 +560,88 @@
 
             function handleDrop(e) {
                 const files = e.dataTransfer.files;
-                if (files.length > 0 && files[0].name.endsWith('.csv')) {
+                if (files.length > 0) {
                     fileInput.files = files;
                     processFile(files[0]);
                 }
             }
         }
 
-        // Data Loading Functions
-        async function loadSavedData() {
-            try {
-                const savedData = localStorage.getItem('leagueTableDataV2');
-                if (savedData) {
-                    const data = JSON.parse(savedData);
-                    allStoreData = data.allStoreData || [];
-                    previousData = data.previousData || [];
-                    uploadHistory = data.uploadHistory || [];
-                    
-                    if (allStoreData.length > 0) {
-                        processData();
-                        return true;
-                    }
-                }
-            } catch (error) {
-                console.error('Error loading saved data:', error);
-            }
-            return false;
-        }
-
-        function loadDemoData() {
-            console.log('📋 Loading demo data...');
-            const demoData = [
-                { store: 'A031 DOUGLAS - ISLE OF MAN', participation: 16.7 },
-                { store: 'A025 TELFORD - STAFFORD PARK', participation: 10.3 },
-                { store: 'A031 ASTON', participation: 9.7 },
-                { store: 'A025 BIRKENHEAD', participation: 9.7 },
-                { store: 'A031 KIRKBY', participation: 9.3 },
-                { store: 'A025 GLOSSOP', participation: 9.3 },
-                { store: 'A031 WOLVERHAMPTON - MARSTRAND', participation: 7.2 },
-                { store: 'A025 CHESTER', participation: 6.8 },
-                { store: 'A031 STOKE - BURSLEM', participation: 5.9 },
-                { store: 'A025 WALSALL WOOD', participation: 5.2 },
-                { store: 'A031 BOLTON', participation: 4.8 },
-                { store: 'A025 CARNFORTH', participation: 4.1 },
-                { store: 'A031 WEDNESBURY', participation: 3.9 },
-                { store: 'A025 MACCLESFIELD', participation: 3.7 }
-            ];
-
-            console.log('📋 Demo data prepared:', demoData.length, 'stores');
-            
-            allStoreData = demoData;
-            uploadHistory.push({
-                fileName: 'Demo Data (Location/Participation %)',
-                uploadTime: new Date().toLocaleString(),
-                recordCount: demoData.length
-            });
-            
-            console.log('🔄 Processing demo data...');
-            processData();
-            saveDataToStorage();
-            console.log('✅ Demo data loaded and processed successfully');
-        }
-
-        function saveDataToStorage() {
-            const dataToSave = {
-                allStoreData,
-                previousData,
-                uploadHistory,
-                lastUpdated: new Date().toISOString()
-            };
-            localStorage.setItem('leagueTableDataV2', JSON.stringify(dataToSave));
-        }
-
-        // URL Loading Functions
-        async function loadFromUrl() {
-            const urlInput = document.getElementById('jsonUrl');
-            let url = urlInput.value.trim();
-            
-            // If no URL provided, use the default GitHub URL
-            if (!url) {
-                url = 'https://raw.githubusercontent.com/paulhilton74/Leaguetabledata/main/league.json';
-                urlInput.value = url;
-            }
-            
-            console.log('🌐 Loading data from URL:', url);
-            
-            try {
-                // Show loading indicator
-                const button = event.target;
-                const originalText = button.innerHTML;
-                button.innerHTML = '⏳ Loading...';
-                button.disabled = true;
-                
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const jsonData = await response.json();
-                console.log('📊 JSON data received:', jsonData);
-                
-                // Process the JSON data - handle the expected format
-                if (jsonData.stores && Array.isArray(jsonData.stores)) {
-                    console.log('✅ Processing stores data...');
-                    
-                    // Store previous data for movement calculation
-                    previousData = [...allStoreData];
-                    
-                    // Convert JSON format to internal format and preserve movement data
-                    allStoreData = jsonData.stores.map(store => {
-                        // Handle movement data that might be embedded
-                        let movement = 'NEW';
-                        if (store.movement !== undefined && store.movement !== null) {
-                            if (typeof store.movement === 'string') {
-                                // Handle string format like "+5", "-3", "0", "NEW"
-                                if (store.movement === '0' || store.movement === 0) {
-                                    movement = 0;
-                                } else if (store.movement.startsWith('+')) {
-                                    movement = parseInt(store.movement.substring(1));
-                                } else if (store.movement.startsWith('-')) {
-                                    movement = -parseInt(store.movement.substring(1));
-                                } else if (!isNaN(parseInt(store.movement))) {
-                                    movement = parseInt(store.movement);
-                                }
-                            } else if (typeof store.movement === 'number') {
-                                movement = store.movement;
-                            }
-                        } else if (store.previousRank && store.rank) {
-                            // Calculate movement from ranks if not provided
-                            movement = store.previousRank - store.rank;
-                        }
-                        
-                        return {
-                            store: store.store,
-                            participation: store.participation || 0,
-                            rank: store.rank || 0,
-                            movement: movement,
-                            previousRank: store.previousRank || null,
-                            area: store.area ? store.area.display : 'Unknown'
-                        };
-                    });
-                    
-                    // Add to upload history
-                    uploadHistory.push({
-                        fileName: `URL: ${new URL(url).hostname}`,
-                        uploadTime: new Date().toLocaleString(),
-                        recordCount: allStoreData.length,
-                        source: 'URL'
-                    });
-                    
-                    console.log('🔄 Processing data...');
-                    processData();
-                    saveDataToStorage();
-                    
-                    // Reset button
-                    button.innerHTML = originalText;
-                    button.disabled = false;
-                    
-                    // Calculate movement statistics
-                    const movedUp = allStoreData.filter(s => typeof s.movement === 'number' && s.movement > 0).length;
-                    const movedDown = allStoreData.filter(s => typeof s.movement === 'number' && s.movement < 0).length;
-                    const stayedSame = allStoreData.filter(s => s.movement === 0).length;
-                    const newStores = allStoreData.filter(s => s.movement === 'NEW').length;
-                    
-                    alert(`✅ Data loaded successfully from URL!\n\n` +
-                          `📊 Stores loaded: ${allStoreData.length}\n` +
-                          `📊 Source: ${jsonData.metadata ? jsonData.metadata.dataSource : 'Unknown'}\n` +
-                          `📊 Average: ${jsonData.metadata ? jsonData.metadata.averageParticipation + '%' : 'Unknown'}\n\n` +
-                          `📈 Movement Summary:\n` +
-                          `🔺 Moved Up: ${movedUp}\n` +
-                          `🔻 Moved Down: ${movedDown}\n` +
-                          `➖ Stayed Same: ${stayedSame}\n` +
-                          `🆕 New Stores: ${newStores}`);
-                    
-                } else {
-                    throw new Error('Invalid JSON format. Expected data with stores array.');
-                }
-                
-            } catch (error) {
-                console.error('❌ Error loading data from URL:', error);
-                
-                // Reset button
-                const button = event.target;
-                button.innerHTML = '🔗 Load from URL';
-                button.disabled = false;
-                
-                alert(`❌ Error loading data from URL:\n\n${error.message}\n\nPlease check:\n• URL is accessible\n• JSON format is correct\n• Internet connection`);
-            }
-        }
-
-        // Two Files Loading Function
-        async function loadTwoFiles() {
-            const previousDayUrlInput = document.getElementById('previousDayUrl');
-            const currentDayUrlInput = document.getElementById('currentDayUrl');
-            
-            let previousDayUrl = previousDayUrlInput.value.trim();
-            let currentDayUrl = currentDayUrlInput.value.trim();
-            
-            // Validate URLs
-            if (!previousDayUrl) {
-                alert('❌ Please enter the Previous Day URL');
-                return;
-            }
-            
-            // If no current day URL provided, use the default GitHub URL
-            if (!currentDayUrl) {
-                currentDayUrl = 'https://raw.githubusercontent.com/paulhilton74/Leaguetabledata/main/league.json';
-                currentDayUrlInput.value = currentDayUrl;
-            }
-            
-            console.log('📊 Loading data from two URLs:');
-            console.log('📅 Previous day:', previousDayUrl);
-            console.log('📅 Current day:', currentDayUrl);
-            
-            try {
-                // Show loading indicator
-                const button = event.target;
-                const originalText = button.innerHTML;
-                button.innerHTML = '⏳ Loading Previous Day...';
-                button.disabled = true;
-                
-                // Load previous day data
-                const previousResponse = await fetch(previousDayUrl);
-                if (!previousResponse.ok) {
-                    throw new Error(`Previous day data: HTTP error! status: ${previousResponse.status}`);
-                }
-                const previousDayData = await previousResponse.json();
-                
-                button.innerHTML = '⏳ Loading Current Day...';
-                
-                // Load current day data
-                const currentResponse = await fetch(currentDayUrl);
-                if (!currentResponse.ok) {
-                    throw new Error(`Current day data: HTTP error! status: ${currentResponse.status}`);
-                }
-                const currentDayData = await currentResponse.json();
-                
-                button.innerHTML = '⏳ Calculating Movement...';
-                
-                // Validate data format
-                if (!previousDayData.stores || !Array.isArray(previousDayData.stores)) {
-                    throw new Error('Previous day data: Invalid JSON format. Expected stores array.');
-                }
-                if (!currentDayData.stores || !Array.isArray(currentDayData.stores)) {
-                    throw new Error('Current day data: Invalid JSON format. Expected stores array.');
-                }
-                
-                console.log('✅ Both datasets loaded successfully');
-                console.log('📊 Previous day stores:', previousDayData.stores.length);
-                console.log('📊 Current day stores:', currentDayData.stores.length);
-                
-                // Create a map of previous day rankings for quick lookup
-                const previousRankings = new Map();
-                previousDayData.stores.forEach(store => {
-                    previousRankings.set(store.store, store.rank);
-                });
-                
-                // Process current day data and calculate movement
-                previousData = previousDayData.stores.map(store => ({
-                    store: store.store,
-                    participation: store.participation || 0,
-                    rank: store.rank || 0,
-                    area: store.area ? store.area.display : 'Unknown'
-                }));
-                
-                allStoreData = currentDayData.stores.map(store => {
-                    const previousRank = previousRankings.get(store.store);
-                    let movement = 'NEW';
-                    
-                    if (previousRank !== undefined) {
-                        movement = previousRank - (store.rank || 0);
-                        if (movement === 0) {
-                            movement = 0; // No change
-                        }
-                    }
-                    
-                    return {
-                        store: store.store,
-                        participation: store.participation || 0,
-                        rank: store.rank || 0,
-                        movement: movement,
-                        previousRank: previousRank || null,
-                        area: store.area ? store.area.display : 'Unknown'
-                    };
-                });
-                
-                // Add to upload history
-                uploadHistory.push({
-                    fileName: `Two-Day Comparison: ${new URL(previousDayUrl).hostname} vs ${new URL(currentDayUrl).hostname}`,
-                    uploadTime: new Date().toLocaleString(),
-                    recordCount: allStoreData.length,
-                    source: 'Two URLs'
-                });
-                
-                console.log('🔄 Processing data with movement calculations...');
-                processData();
-                saveDataToStorage();
-                
-                // Reset button
-                button.innerHTML = originalText;
-                button.disabled = false;
-                
-                // Calculate movement statistics
-                const movedUp = allStoreData.filter(s => typeof s.movement === 'number' && s.movement > 0).length;
-                const movedDown = allStoreData.filter(s => typeof s.movement === 'number' && s.movement < 0).length;
-                const stayedSame = allStoreData.filter(s => s.movement === 0).length;
-                const newStores = allStoreData.filter(s => s.movement === 'NEW').length;
-                
-                alert(`✅ Two-day comparison loaded successfully!\n\n` +
-                      `📊 Total Stores: ${allStoreData.length}\n` +
-                      `🔺 Moved Up: ${movedUp}\n` +
-                      `🔻 Moved Down: ${movedDown}\n` +
-                      `➖ Stayed Same: ${stayedSame}\n` +
-                      `🆕 New Stores: ${newStores}\n\n` +
-                      `Movement data calculated automatically!`);
-                
-            } catch (error) {
-                console.error('❌ Error loading two-day data:', error);
-                
-                // Reset button
-                const button = event.target;
-                button.innerHTML = '📈 Load Both Files & Calculate Movement';
-                button.disabled = false;
-                
-                alert(`❌ Error loading two-day comparison:\n\n${error.message}\n\nPlease check:\n• Both URLs are accessible\n• JSON formats are correct\n• Internet connection`);
-            }
-        }
-
-        // Force Refresh Function with enhanced debugging
-        async function forceRefreshFromUrl() {
-            console.log('🔄 Force refresh initiated...');
-            
-            // Additional confirmation
-            if (!confirm('🔄 This will clear all local data and force download fresh data from GitHub.\n\nAre you sure you want to continue?')) {
-                return;
-            }
-            
-            try {
-                // Clear all local data first
-                console.log('🗬 Clearing localStorage...');
-                localStorage.removeItem('leagueTableDataV2');
-                allStoreData = [];
-                previousData = [];
-                currentData = [];
-                uploadHistory = [];
-                
-                // Hide dashboard during refresh
-                document.getElementById('dashboard').style.display = 'none';
-                
-                // Show loading indicator
-                const button = event.target;
-                const originalText = button.innerHTML;
-                button.innerHTML = '⏳ Force Refreshing...';
-                button.disabled = true;
-                
-                // Build URL with cache-busting parameter
-                const baseUrl = 'https://raw.githubusercontent.com/paulhilton74/Leaguetabledata/main/league.json';
-                const cacheBuster = new Date().getTime();
-                const url = `${baseUrl}?t=${cacheBuster}&nocache=true`;
-                
-                console.log('🌐 Force loading from URL:', url);
-                
-                // Force fetch with no-cache headers
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Cache-Control': 'no-cache, no-store, must-revalidate',
-                        'Pragma': 'no-cache',
-                        'Expires': '0'
-                    }
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const jsonData = await response.json();
-                console.log('📊 Fresh JSON data received:', jsonData.metadata);
-                
-                // Process the JSON data with movement handling
-                if (jsonData.stores && Array.isArray(jsonData.stores)) {
-                    console.log('✅ Processing fresh stores data...');
-                    
-                    // Convert JSON format to internal format and preserve movement data
-                    allStoreData = jsonData.stores.map(store => {
-                        // Handle movement data that might be embedded
-                        let movement = 'NEW';
-                        if (store.movement !== undefined && store.movement !== null) {
-                            if (typeof store.movement === 'string') {
-                                // Handle string format like "+5", "-3", "0", "NEW"
-                                if (store.movement === '0' || store.movement === 0) {
-                                    movement = 0;
-                                } else if (store.movement.startsWith('+')) {
-                                    movement = parseInt(store.movement.substring(1));
-                                } else if (store.movement.startsWith('-')) {
-                                    movement = -parseInt(store.movement.substring(1));
-                                } else if (!isNaN(parseInt(store.movement))) {
-                                    movement = parseInt(store.movement);
-                                }
-                            } else if (typeof store.movement === 'number') {
-                                movement = store.movement;
-                            }
-                        } else if (store.previousRank && store.rank) {
-                            // Calculate movement from ranks if not provided
-                            movement = store.previousRank - store.rank;
-                        }
-                        
-                        return {
-                            store: store.store,
-                            participation: store.participation || 0,
-                            rank: store.rank || 0,
-                            movement: movement,
-                            previousRank: store.previousRank || null,
-                            area: store.area ? store.area.display : 'Unknown'
-                        };
-                    });
-                    
-                    // Add to upload history with force refresh indicator
-                    uploadHistory.push({
-                        fileName: `Force Refresh: GitHub (${new Date().toLocaleTimeString()})`,
-                        uploadTime: new Date().toLocaleString(),
-                        recordCount: allStoreData.length,
-                        source: 'Force Refresh'
-                    });
-                    
-                    console.log('🔄 Processing fresh data...');
-                    processData();
-                    saveDataToStorage();
-                    
-                    // Reset button
-                    button.innerHTML = originalText;
-                    button.disabled = false;
-                    
-                    // Calculate movement statistics
-                    const movedUp = allStoreData.filter(s => typeof s.movement === 'number' && s.movement > 0).length;
-                    const movedDown = allStoreData.filter(s => typeof s.movement === 'number' && s.movement < 0).length;
-                    const stayedSame = allStoreData.filter(s => s.movement === 0).length;
-                    const newStores = allStoreData.filter(s => s.movement === 'NEW').length;
-                    
-                    alert(`✅ Force refresh successful!\n\n` +
-                          `📊 Fresh data loaded: ${allStoreData.length} stores\n` +
-                          `📊 Source: ${jsonData.metadata ? jsonData.metadata.dataSource : 'Unknown'}\n` +
-                          `📊 Export Time: ${jsonData.metadata ? jsonData.metadata.exportTime : 'Unknown'}\n` +
-                          `📊 Average: ${jsonData.metadata ? jsonData.metadata.averageParticipation + '%' : 'Unknown'}\n\n` +
-                          `📈 Movement Summary:\n` +
-                          `🔺 Moved Up: ${movedUp}\n` +
-                          `🔻 Moved Down: ${movedDown}\n` +
-                          `➖ Stayed Same: ${stayedSame}\n` +
-                          `🆕 New Stores: ${newStores}\n\n` +
-                          `🚀 Cache cleared & fresh data loaded!`);
-                    
-                } else {
-                    throw new Error('Invalid JSON format. Expected data with stores array.');
-                }
-                
-            } catch (error) {
-                console.error('❌ Error during force refresh:', error);
-                
-                // Reset button
-                const button = event.target;
-                button.innerHTML = '🔄 Force Refresh from URL';
-                button.disabled = false;
-                
-                alert(`❌ Force refresh failed:\n\n${error.message}\n\nPlease check:\n• Internet connection\n• GitHub repository is accessible\n• JSON format is correct`);
-            }
-        }
-
-        // Quick Refresh - simpler method
-        function quickRefresh() {
-            console.log('⚡ Quick refresh initiated...');
-            
-            try {
-                // Clear localStorage and reset variables
-                localStorage.clear();
-                allStoreData = [];
-                previousData = [];
-                currentData = [];
-                uploadHistory = [];
-                
-                // Hide dashboard
-                document.getElementById('dashboard').style.display = 'none';
-                
-                // Build cache-busted URL
-                const timestamp = new Date().getTime();
-                const url = `https://raw.githubusercontent.com/paulhilton74/Leaguetabledata/main/league.json?nocache=${timestamp}`;
-                
-                // Update the URL input field
-                document.getElementById('jsonUrl').value = url;
-                
-                // Show user what's happening
-                alert(`⚡ Quick refresh started!\n\nURL: ${url}\n\nClick OK, then click 'Load Single File' to complete the refresh.`);
-                
-            } catch (error) {
-                console.error('❌ Quick refresh error:', error);
-                alert(`❌ Quick refresh failed: ${error.message}`);
-            }
-        }
-
-        // File Processing
         function uploadFile() {
             const fileInput = document.getElementById('csvFile');
             const file = fileInput.files[0];
             
             if (!file) {
-                alert('Please select a CSV file first.');
+                alert('Please select a file first.');
                 return;
             }
             
             processFile(file);
         }
 
-        function processFile(file) {
-            if (!file.name.toLowerCase().endsWith('.csv')) {
-                alert('Please select a valid CSV file.');
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    processCSV(e.target.result, file.name);
-                } catch (error) {
-                    alert('Error processing CSV file: ' + error.message);
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        function processCSV(csvContent, fileName) {
-            // Remove BOM if present and handle different line endings
-            csvContent = csvContent.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-            
-            const lines = csvContent.trim().split('\n');
-            if (lines.length < 2) {
-                alert('CSV file must contain at least a header and one data row.');
-                return;
-            }
-
-            // Enhanced CSV parsing to handle quoted values with commas
-            function parseCSVLine(line) {
-                const result = [];
-                let current = '';
-                let inQuotes = false;
-                
-                for (let i = 0; i < line.length; i++) {
-                    const char = line[i];
-                    
-                    if (char === '"') {
-                        inQuotes = !inQuotes;
-                    } else if (char === ',' && !inQuotes) {
-                        result.push(current.trim());
-                        current = '';
-                    } else {
-                        current += char;
-                    }
-                }
-                result.push(current.trim());
-                return result;
-            }
-
-            // Parse headers
-            const rawHeaders = parseCSVLine(lines[0]);
-            const headers = rawHeaders.map(h => h.trim());
-            const normalized = headers.map(h => h.replace(/\s+/g, '').toLowerCase());
-
-            console.log('Detected headers:', rawHeaders);
-
-            // Accept common variants for store/location and participation columns
-            const storeIndex = normalized.findIndex(h =>
-                ['store', 'storename', 'shop', 'branch', 'location', 'sitename', 'outlet']
-                    .some(key => h.includes(key))
-            );
-            const participationIndex = normalized.findIndex(h =>
-                ['participation%', 'participation', 'participationpercent', 'participationpercentage', 'percent', 'percentage']
-                    .some(key => h.includes(key))
-            );
-            const areaCodeIndex = normalized.findIndex(h =>
-                h === 'areacode' || h.includes('areacode')
-            );
-
-            console.log('Store column index:', storeIndex, 'Participation column index:', participationIndex, 'Area code index:', areaCodeIndex);
-
-            if (storeIndex === -1 || participationIndex === -1) {
-                alert(
-                    'CSV must contain "Store/Location" and "Participation %" columns.\n' +
-                    'Detected headers: ' + rawHeaders.join(', ')
-                );
-                return;
-            }
-
-            // Store previous data for movement calculation
-            previousData = [...allStoreData];
-
-            // Process new data
-            const newData = [];
-            for (let i = 1; i < lines.length; i++) {
-                if (!lines[i].trim()) continue; // Skip empty lines
-                
-                const values = parseCSVLine(lines[i]);
-                
-                const maxIndex = Math.max(storeIndex, participationIndex, areaCodeIndex !== -1 ? areaCodeIndex : 0);
-                if (values.length > maxIndex) {
-                    const store = values[storeIndex]?.trim();
-                    let participationRaw = values[participationIndex]?.trim();
-                    const areaCode = areaCodeIndex !== -1 ? values[areaCodeIndex]?.trim() : null;
-                    
-                    if (store && participationRaw) {
-                        // Clean up participation value - remove %, handle decimals properly
-                        participationRaw = participationRaw.replace('%', '').replace(/,/g, '');
-                        const participation = parseFloat(participationRaw);
-                        
-                        console.log(`Processing: ${store} -> ${participationRaw} -> ${participation}% -> Area: ${areaCode}`);
-                        
-                        if (!isNaN(participation) && participation >= 0 && participation <= 100) {
-                            const storeData = { store, participation };
-                            if (areaCode) {
-                                storeData.areaCode = areaCode;
-                            }
-                            newData.push(storeData);
-                        } else if (!isNaN(participation)) {
-                            console.warn(`Suspicious participation value for ${store}: ${participation}%`);
-                            const storeData = { store, participation };
-                            if (areaCode) {
-                                storeData.areaCode = areaCode;
-                            }
-                            newData.push(storeData);
-                        }
-                    }
-                }
-            }
-
-            console.log('Processed data:', newData);
-
-            if (newData.length === 0) {
-                alert('No valid data found in CSV file.');
-                return;
-            }
-
-            allStoreData = newData;
-            
-            // Update upload history
-            uploadHistory.push({
-                fileName: fileName || 'Unknown File',
-                uploadTime: new Date().toLocaleString(),
-                recordCount: newData.length
-            });
-
-            processData();
-            saveDataToStorage();
-            
-            // Show success message
-            setTimeout(() => {
-                alert(`Successfully processed ${newData.length} store records!`);
-            }, 100);
-        }
-
-        // Data Processing
         function processData() {
             if (allStoreData.length === 0) return;
 
-            // Calculate rankings and movements
-            currentData = allStoreData.map(store => {
-                const previousStore = previousData.find(p => p.store === store.store);
-                const previousRank = previousStore 
-                    ? previousData
-                        .sort((a, b) => b.participation - a.participation)
-                        .findIndex(p => p.store === store.store) + 1 
-                    : null;
-                
-                // Use existing area data if available (from embedded JSON), otherwise extract from name
-                const area = store.area && store.area.display ? store.area : extractAreaInfo(store);
-                
-                return { ...store, previousRank, area };
-            });
-
-            // Sort by participation (descending)
-            currentData.sort((a, b) => b.participation - a.participation);
-
-            // Add current rank and movement
-            currentData.forEach((store, index) => {
+            // Calculate rankings
+            filteredData = allStoreData.sort((a, b) => b.participation - a.participation);
+            filteredData.forEach((store, index) => {
                 store.rank = index + 1;
-                // Use existing movement data if available (from embedded JSON), otherwise calculate
-                if (store.movement === undefined || store.movement === null) {
-                    store.movement = calculateMovement(store.previousRank, store.rank);
-                }
             });
 
-            filteredData = [...currentData];
-            updateAreaDropdown();
-            updateDashboard();
-        }
-
-        function extractAreaInfo(store) {
-            // First, try to use the areaCode field from CSV if available
-            if (store.areaCode && store.areaCode.trim() && store.areaCode !== '') {
-                const areaCode = store.areaCode.trim().toUpperCase();
-                const areaMatch = areaCode.match(/A(\d+)/i);
-                if (areaMatch) {
-                    const areaNumber = parseInt(areaMatch[1]);
-                    return {
-                        code: areaCode,
-                        number: areaNumber,
-                        display: `Area ${areaNumber}`
-                    };
-                }
-            }
-            
-            // Fallback: Extract area code from store name (e.g., "A031" from store name)
-            const areaMatch = store.store.match(/A(\d{3})/i);
-            if (areaMatch) {
-                const areaNumber = parseInt(areaMatch[1]);
-                return {
-                    code: areaMatch[0].toUpperCase(),
-                    number: areaNumber,
-                    display: `Area ${areaNumber}`
-                };
-            }
-            
-            // If no area code found, try to extract from other patterns
-            // Look for patterns like "Area 31", "AREA31", etc.
-            const areaPattern = store.store.match(/area\s*(\d+)/i);
-            if (areaPattern) {
-                const areaNumber = parseInt(areaPattern[1]);
-                return {
-                    code: `A${areaNumber.toString().padStart(3, '0')}`,
-                    number: areaNumber,
-                    display: `Area ${areaNumber}`
-                };
-            }
-            
-            return {
-                code: 'UNKNOWN',
-                number: 0,
-                display: 'No Area'
-            };
-        }
-
-        function updateAreaDropdown() {
-            // Extract unique areas from current data
-            const areas = [...new Set(currentData.map(store => store.area.code))]
-                .filter(code => code !== 'UNKNOWN')
-                .sort((a, b) => {
-                    const numA = parseInt(a.substring(1));
-                    const numB = parseInt(b.substring(1));
-                    return numA - numB;
-                });
-            
-            availableAreas = areas;
-            
-            const areaSelect = document.getElementById('areaFilter');
-            // Clear existing options except "All Areas"
-            while (areaSelect.children.length > 1) {
-                areaSelect.removeChild(areaSelect.lastChild);
-            }
-            
-            // Add area options
-            areas.forEach(areaCode => {
-                const option = document.createElement('option');
-                option.value = areaCode;
-                const areaNumber = parseInt(areaCode.substring(1));
-                option.textContent = `Area ${areaNumber} (${areaCode})`;
-                areaSelect.appendChild(option);
-            });
-        }
-
-        function calculateMovement(previousRank, currentRank) {
-            if (!previousRank) return 'NEW';
-            const change = previousRank - currentRank;
-            return change;
-        }
-
-        // Dashboard Updates
-        function updateDashboard() {
-            console.log('📏 Updating dashboard with', currentData.length, 'stores');
-            if (currentData.length === 0) {
-                console.warn('⚠️ No current data available for dashboard update');
-                return;
-            }
-
+            // Update UI
             document.getElementById('dashboard').style.display = 'block';
             document.getElementById('filterSection').style.display = 'flex';
-            console.log('✅ Dashboard made visible');
-            
-            updateStatistics();
-            updateTopBottomStores();
-            updateBiggestMovers();
-            updateMainTable();
-            console.log('✅ All dashboard sections updated');
+            updateStats();
+            updateTable();
         }
 
-        function updateStatistics() {
+        function updateStats() {
             const total = filteredData.length;
-            const avgParticipation = total > 0 
-                ? (filteredData.reduce((sum, s) => sum + s.participation, 0) / total).toFixed(1) 
-                : 0;
+            const avgParticipation = (filteredData.reduce((sum, s) => sum + s.participation, 0) / total).toFixed(1);
             const topStore = filteredData[0];
             const aboveAverage = filteredData.filter(s => s.participation > avgParticipation).length;
-            const selectedArea = document.getElementById('areaFilter').value;
 
-            // Update totals with area context
-            if (selectedArea) {
-                const areaNumber = parseInt(selectedArea.substring(1));
-                const areaStoresCount = filteredData.filter(s => 
-                    !s.store.toUpperCase().includes('AVERAGE')
-                ).length;
-                document.getElementById('totalStores').innerHTML = `${areaStoresCount}<br><small style="color: var(--info-color); font-size: 0.7em;">Area ${areaNumber}<br>+ Averages</small>`;
-            } else {
-                document.getElementById('totalStores').textContent = total;
-            }
-
-            document.getElementById('avgParticipation').textContent = `${avgParticipation}%`;
-            document.getElementById('topPerformerCount').textContent = aboveAverage;
+            document.getElementById('totalStores').textContent = total;
+            document.getElementById('avgParticipation').textContent = avgParticipation + '%';
+            document.getElementById('topStore').innerHTML = `${topStore.store}<br><small>${topStore.participation.toFixed(1)}%</small>`;
             document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString();
-
-            if (topStore) {
-                const areaInfo = selectedArea ? '' : `<br><small style="color: var(--info-color); font-size: 0.8em;">${topStore.area.display}</small>`;
-                document.getElementById('topStore').innerHTML = 
-                    `${topStore.store}${areaInfo}<br><small style="color: var(--primary-color); font-weight: 600;">${topStore.participation.toFixed(1)}%</small>`;
-            }
+            document.getElementById('topPerformerCount').textContent = aboveAverage;
         }
 
-        function updateTopBottomStores() {
-            const topDiv = document.getElementById('topStores');
-            const bottomDiv = document.getElementById('bottomStores');
-            
-            topDiv.innerHTML = '';
-            bottomDiv.innerHTML = '';
-
-            if (filteredData.length === 0) {
-                topDiv.innerHTML = '<div class="no-data">No data available</div>';
-                bottomDiv.innerHTML = '<div class="no-data">No data available</div>';
-                return;
-            }
-
-            // Top 5 stores
-            filteredData.slice(0, 5).forEach(store => {
-                topDiv.appendChild(createStoreElement(store));
-            });
-
-            // Bottom 5 stores (worst at bottom)
-            filteredData.slice(-5).forEach(store => {
-                bottomDiv.appendChild(createStoreElement(store));
-            });
-        }
-
-        function updateBiggestMovers() {
-            const moversDiv = document.getElementById('biggestMovers');
-            moversDiv.innerHTML = '';
-
-            const movers = filteredData
-                .filter(s => s.movement !== 'NEW' && s.movement !== 0)
-                .sort((a, b) => Math.abs(b.movement) - Math.abs(a.movement));
-
-            if (movers.length === 0) {
-                moversDiv.innerHTML = '<div class="no-data">No movement data available</div>';
-                return;
-            }
-
-            movers.slice(0, 5).forEach(store => {
-                const element = createStoreElement(store, true);
-                moversDiv.appendChild(element);
-            });
-        }
-
-        function createStoreElement(store, showMovement = false) {
-            const div = document.createElement('div');
-            div.className = 'store-item';
-
-            const rank = document.createElement('div');
-            rank.className = 'store-rank';
-            rank.textContent = `#${store.rank}`;
-
-            const name = document.createElement('div');
-            name.className = 'store-name';
-            name.textContent = store.store;
-
-            const participation = document.createElement('div');
-            participation.className = 'store-participation';
-            participation.textContent = `${store.participation.toFixed(1)}%`;
-
-            div.appendChild(rank);
-            div.appendChild(name);
-            div.appendChild(participation);
-
-            if (showMovement) {
-                const movement = document.createElement('div');
-                movement.className = 'store-movement ' + getMovementClass(store.movement);
-                movement.innerHTML = getMovementDisplay(store.movement);
-                div.appendChild(movement);
-            }
-
-            return div;
-        }
-
-        function updateMainTable() {
+        function updateTable() {
             const tableBody = document.getElementById('tableBody');
             tableBody.innerHTML = '';
 
-            if (filteredData.length === 0) {
-                const row = tableBody.insertRow();
-                row.innerHTML = '<td colspan="5" class="no-data">No data matches current filters</td>';
-                return;
-            }
-
-            // Find average store positions
-            const northWestAverageIndex = filteredData.findIndex(store => 
-                store.store.toUpperCase().includes('NORTH WEST AVERAGE') ||
-                (store.store.toUpperCase().includes('NORTH WEST') && store.store.toUpperCase().includes('AVERAGE'))
-            );
-            const northAverageIndex = filteredData.findIndex(store => 
-                store.store.toUpperCase().includes('NORTH AVERAGE') &&
-                !store.store.toUpperCase().includes('NORTH WEST')
-            );
-
-            filteredData.forEach((store, index) => {
-                const row = tableBody.insertRow();
-                
-                // Determine row class based on position relative to averages
-                let rowClass = '';
-                const isNorthWestAverage = store.store.toUpperCase().includes('NORTH WEST AVERAGE') ||
-                    (store.store.toUpperCase().includes('NORTH WEST') && store.store.toUpperCase().includes('AVERAGE'));
-                const isNorthAverage = store.store.toUpperCase().includes('NORTH AVERAGE') &&
-                    !store.store.toUpperCase().includes('NORTH WEST');
-                
-                if (isNorthWestAverage || isNorthAverage) {
-                    rowClass = 'average-store average-divider';
-                } else {
-                    // Check if below averages
-                    const belowNorthWestAverage = northWestAverageIndex !== -1 && index > northWestAverageIndex;
-                    const belowNorthAverage = northAverageIndex !== -1 && index > northAverageIndex;
-                    
-                    if (belowNorthAverage) {
-                        // Below North Average (worst performers) - Pink
-                        rowClass = 'below-north-average';
-                    } else if (belowNorthWestAverage) {
-                        // Below North West Average only - Light Orange
-                        rowClass = 'below-north-west-average';
-                    }
-                }
-                
-                row.className = rowClass;
+            filteredData.forEach(store => {
+                const row = document.createElement('tr');
                 row.innerHTML = `
                     <td class="rank-cell">${store.rank}</td>
-                    <td class="store-cell">${store.store}</td>
-                    <td class="area-cell">${store.area.display}</td>
+                    <td>${store.store}</td>
+                    <td class="area-cell">${store.area?.display || '-'}</td>
                     <td class="participation-cell">${store.participation.toFixed(1)}%</td>
-                    <td class="movement-cell ${getMovementClass(store.movement)}">${getMovementDisplay(store.movement)}</td>
+                    <td class="movement-cell">${getMovementDisplay(store.movement)}</td>
                 `;
+                tableBody.appendChild(row);
             });
         }
 
-        function getMovementClass(movement) {
-            if (movement === 'NEW') return 'movement-new';
-            if (movement === 0) return 'movement-same';
-            return movement > 0 ? 'movement-up' : 'movement-down';
-        }
-
         function getMovementDisplay(movement) {
-            if (movement === 'NEW') return '<span title="New Entry">🆕 NEW</span>';
-            if (movement === 0) return '<span title="No Change">➖</span>';
-            if (movement > 0) return `<span title="Moved up ${movement} positions">⬆️ ${movement}</span>`;
-            return `<span title="Moved down ${Math.abs(movement)} positions">⬇️ ${Math.abs(movement)}</span>`;
+            if (movement === undefined || movement === null) return '-';
+            if (movement === 'NEW') return '🆕';
+            if (movement === 0) return '⏹️';
+            if (movement > 0) return `⬆️ ${movement}`;
+            return `⬇️ ${Math.abs(movement)}`;
         }
 
-        function getTrendDisplay(store) {
-            const participation = store.participation;
-            if (participation >= 15) return '🔥';
-            if (participation >= 10) return '⭐';
-            if (participation >= 7) return '📈';
-            if (participation >= 5) return '➡️';
-            return '📉';
-        }
-
-        // Filter and Sort Functions
         function filterStores() {
             const searchTerm = document.getElementById('searchFilter').value.toLowerCase();
             const selectedArea = document.getElementById('areaFilter').value;
             const minParticipation = parseFloat(document.getElementById('minParticipation').value) || 0;
 
-            filteredData = currentData.filter(store => {
+            filteredData = allStoreData.filter(store => {
                 const matchesSearch = store.store.toLowerCase().includes(searchTerm);
+                const matchesArea = !selectedArea || (store.area?.code === selectedArea);
                 const matchesParticipation = store.participation >= minParticipation;
-                
-                // Always include NORTH WEST AVERAGE and NORTH AVERAGE stores regardless of area filter
-                const isNorthWestAverage = store.store.toUpperCase().includes('NORTH WEST AVERAGE') ||
-                    (store.store.toUpperCase().includes('NORTH WEST') && store.store.toUpperCase().includes('AVERAGE'));
-                const isNorthAverage = store.store.toUpperCase().includes('NORTH AVERAGE') &&
-                    !store.store.toUpperCase().includes('NORTH WEST');
-                
-                if (isNorthWestAverage || isNorthAverage) {
-                    // Always include average stores if they match search and participation filters
-                    return matchesSearch && matchesParticipation;
-                }
-                
-                // For regular stores, apply area filter
-                const matchesArea = !selectedArea || store.area.code === selectedArea;
                 return matchesSearch && matchesArea && matchesParticipation;
             });
 
@@ -2045,1007 +659,22 @@
                     filteredData.sort((a, b) => a.store.localeCompare(b.store));
                     break;
                 case 'area':
-                    filteredData.sort((a, b) => a.area.number - b.area.number);
+                    filteredData.sort((a, b) => (a.area?.number || 0) - (b.area?.number || 0));
                     break;
                 case 'movement':
                     filteredData.sort((a, b) => {
                         if (a.movement === 'NEW') return 1;
                         if (b.movement === 'NEW') return -1;
-                        return b.movement - a.movement;
+                        return (b.movement || 0) - (a.movement || 0);
                     });
                     break;
                 default: // rank
                     filteredData.sort((a, b) => a.rank - b.rank);
             }
 
-            updateMainTable();
-            updateStatistics();
-            updateTopBottomStores(); // Added this line to update Top 5 and Bottom 5 when filters change
-            updateBiggestMovers(); // Added this line to update Biggest Movers when filters change
+            updateStats();
+            updateTable();
         }
-
-        // Admin Functions
-        function toggleAdmin() {
-            if (!isAdminUser) {
-                alert('Admin access denied. Please use URL parameter ?admin=1');
-                return;
-            }
-            document.getElementById('adminControls').classList.toggle('show');
-        }
-
-        function clearData() {
-            if (!confirm('Are you sure you want to clear all data? This cannot be undone.')) return;
-            
-            localStorage.removeItem('leagueTableDataV2');
-            allStoreData = [];
-            previousData = [];
-            currentData = [];
-            filteredData = [];
-            uploadHistory = [];
-            
-            document.getElementById('dashboard').style.display = 'none';
-            document.getElementById('filterSection').style.display = 'none';
-            document.getElementById('csvFile').value = '';
-            
-            alert('All data cleared successfully.');
-        }
-
-        function exportData() {
-            if (filteredData.length === 0) {
-                alert('No data to export.');
-                return;
-            }
-
-            const csvContent = [
-                'Rank,Store,Participation %,Movement,Previous Rank',
-                ...filteredData.map(store => 
-                    `${store.rank},"${store.store}",${store.participation},${store.movement === 'NEW' ? 'NEW' : store.movement},${store.previousRank || 'N/A'}`
-                )
-            ].join('\n');
-
-            downloadFile(csvContent, `league_table_export_${new Date().toISOString().split('T')[0]}.csv`, 'text/csv');
-            
-            alert(`Exported ${filteredData.length} records successfully!`);
-        }
-        
-        function exportJSON() {
-            if (currentData.length === 0) {
-                alert('No data to export. Please upload data first.');
-                return;
-            }
-            
-            const timestamp = new Date().toISOString().split('T')[0];
-            const filename = `league_table_data_${timestamp}.json`;
-            
-            // Create comprehensive JSON export
-            const jsonData = {
-                metadata: {
-                    exportDate: new Date().toISOString(),
-                    exportTime: new Date().toLocaleString(),
-                    totalStores: currentData.length,
-                    dataSource: uploadHistory[uploadHistory.length - 1]?.fileName || 'Demo Data',
-                    averageParticipation: (currentData.reduce((sum, s) => sum + s.participation, 0) / currentData.length).toFixed(1),
-                    version: 'v2.0'
-                },
-                stores: currentData.map(store => ({
-                    rank: store.rank,
-                    store: store.store,
-                    participation: store.participation,
-                    movement: store.movement,
-                    previousRank: store.previousRank,
-                    area: {
-                        code: store.area.code,
-                        number: store.area.number,
-                        display: store.area.display
-                    }
-                })),
-                previousData: previousData.map(store => ({
-                    store: store.store,
-                    participation: store.participation,
-                    areaCode: store.areaCode || null
-                })),
-                uploadHistory: uploadHistory,
-                statistics: {
-                    topStore: currentData[0],
-                    bottomStore: currentData[currentData.length - 1],
-                    aboveAverageCount: currentData.filter(s => s.participation > (currentData.reduce((sum, s) => sum + s.participation, 0) / currentData.length)).length,
-                    availableAreas: availableAreas,
-                    biggestMovers: currentData
-                        .filter(s => s.movement !== 'NEW' && s.movement !== 0)
-                        .sort((a, b) => Math.abs(b.movement) - Math.abs(a.movement))
-                        .slice(0, 5)
-                }
-            };
-            
-            const jsonContent = JSON.stringify(jsonData, null, 2);
-            downloadFile(jsonContent, filename, 'application/json');
-            
-            // Show success message with details
-            setTimeout(() => {
-                alert(
-                    `📄 JSON Data Exported Successfully!\n\n` +
-                    `File: ${filename}\n` +
-                    `Total Stores: ${currentData.length}\n` +
-                    `File Size: ~${Math.round(jsonContent.length / 1024)} KB\n\n` +
-                    `This JSON file contains:\n` +
-                    `• Complete store data with rankings\n` +
-                    `• Area information for each store\n` +
-                    `• Movement tracking data & previous rankings\n` +
-                    `• Upload history and metadata\n` +
-                    `• Statistics and analytics\n\n` +
-                    `You can:\n` +
-                    `• Share this file with other users\n` +
-                    `• Load it back into the dashboard\n` +
-                    `• Use it as a data backup\n` +
-                    `• Import it into other systems\n\n` +
-                    `The file has been downloaded to your Downloads folder.`
-                );
-            }, 100);
-        }
-        
-        function importJSON() {
-            if (!isAdminUser) {
-                alert('Admin access required to import JSON data.');
-                return;
-            }
-            
-            // Create file input for JSON
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.json';
-            input.style.display = 'none';
-            
-            input.addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                if (!file) return;
-                
-                if (!file.name.toLowerCase().endsWith('.json')) {
-                    alert('Please select a valid JSON file.');
-                    return;
-                }
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    try {
-                        const jsonData = JSON.parse(e.target.result);
-                        
-                        // Validate JSON structure
-                        if (!jsonData.stores || !Array.isArray(jsonData.stores)) {
-                            alert('Invalid JSON format. Missing or invalid stores data.');
-                            return;
-                        }
-                        
-                        // Import the data
-                        allStoreData = jsonData.stores.map(store => ({
-                            store: store.store,
-                            participation: store.participation,
-                            areaCode: store.area?.code || null
-                        }));
-                        
-                        // Restore previous data for movement tracking (if available)
-                        if (jsonData.previousData && Array.isArray(jsonData.previousData)) {
-                            previousData = jsonData.previousData.map(store => ({
-                                store: store.store,
-                                participation: store.participation,
-                                areaCode: store.areaCode || null
-                            }));
-                            console.log('✅ Restored previous data for movement tracking:', previousData.length, 'stores');
-                        } else {
-                            // If no previous data in JSON, use current allStoreData as previous
-                            // This will result in 'NEW' movements for all stores
-                            previousData = [];
-                            console.log('⚠️ No previous data found in JSON - all movements will show as NEW');
-                        }
-                        
-                        // Update upload history
-                        uploadHistory.push({
-                            fileName: `${file.name} (JSON Import)`,
-                            uploadTime: new Date().toLocaleString(),
-                            recordCount: allStoreData.length
-                        });
-                        
-                        // If JSON has upload history, merge it
-                        if (jsonData.uploadHistory && Array.isArray(jsonData.uploadHistory)) {
-                            uploadHistory = [...uploadHistory, ...jsonData.uploadHistory];
-                        }
-                        
-                        // Process the imported data
-                        processData();
-                        saveDataToStorage();
-                        
-                        // Show success message
-                        setTimeout(() => {
-                            const hasMovementData = jsonData.previousData && jsonData.previousData.length > 0;
-                            alert(
-                                `📁 JSON Data Imported Successfully!\n\n` +
-                                `File: ${file.name}\n` +
-                                `Total Stores: ${allStoreData.length}\n` +
-                                `Previous Data: ${hasMovementData ? jsonData.previousData.length + ' stores' : 'None (movements will show as NEW)'}\n` +
-                                `Data Source: ${jsonData.metadata?.dataSource || 'Unknown'}\n` +
-                                `Export Date: ${jsonData.metadata?.exportTime || 'Unknown'}\n\n` +
-                                `The data has been loaded and processed.\n` +
-                                `Movement tracking: ${hasMovementData ? '✅ Preserved' : '⚠️ Reset (all NEW)'}\n` +
-                                `Dashboard updated with imported data.`
-                            );
-                        }, 100);
-                        
-                    } catch (error) {
-                        console.error('JSON Import Error:', error);
-                        alert('Error parsing JSON file: ' + error.message);
-                    }
-                };
-                
-                reader.readAsText(file);
-            });
-            
-            // Trigger file selection
-            document.body.appendChild(input);
-            input.click();
-            document.body.removeChild(input);
-        }
-
-        function resetRankings() {
-            if (!confirm('Reset all movement tracking? This will treat all stores as new entries.')) return;
-            
-            previousData = [];
-            currentData.forEach(store => {
-                store.movement = 'NEW';
-                store.previousRank = null;
-            });
-            
-            updateDashboard();
-            saveDataToStorage();
-            
-            alert('Rankings reset successfully. All movements cleared.');
-        }
-
-        function showDataInfo() {
-            const info = `
-Data Information:
-• Total Records: ${currentData.length}
-• Upload History: ${uploadHistory.length} files
-• Last Updated: ${new Date(JSON.parse(localStorage.getItem('leagueTableDataV2') || '{}').lastUpdated || new Date()).toLocaleString()}
-• Average Participation: ${currentData.length > 0 ? (currentData.reduce((s, store) => s + store.participation, 0) / currentData.length).toFixed(1) : 0}%
-
-Recent Uploads:
-${uploadHistory.slice(-3).map(h => `• ${h.fileName} (${h.recordCount} records) - ${h.uploadTime}`).join('\n')}
-            `;
-            alert(info);
-        }
-
-        function generateStandaloneVersion() {
-            if (currentData.length === 0) {
-                alert('No data available to create standalone version. Please upload data first.');
-                return;
-            }
-
-            const timestamp = new Date().toISOString().split('T')[0];
-            const filename = `League_Table_Standalone_${timestamp}.html`;
-            
-            // Create standalone HTML with embedded data
-            const standaloneHTML = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store League Table Dashboard - Standalone</title>
-    <style>
-        :root {
-            --primary-color: #007AFF;
-            --primary-dark: #0056b3;
-            --success-color: #28a745;
-            --danger-color: #dc3545;
-            --warning-color: #ffc107;
-            --info-color: #17a2b8;
-            --light-bg: #f8f9fa;
-            --dark-text: #1d1d1f;
-            --light-text: #666;
-            --border-color: #e9ecef;
-            --shadow: 0 4px 20px rgba(0,0,0,0.08);
-            --shadow-hover: 0 6px 25px rgba(0,0,0,0.12);
-            --border-radius: 12px;
-            --transition: all 0.3s ease;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--dark-text);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        
-        .header { text-align: center; margin-bottom: 40px; }
-        .header h1 {
-            font-size: 3em; font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-color), var(--info-color));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; margin-bottom: 10px;
-        }
-        .version-badge {
-            background: var(--success-color); color: white; padding: 4px 12px;
-            border-radius: 20px; font-size: 0.8em; font-weight: 600; margin-left: 10px;
-        }
-        .subtitle { color: var(--light-text); font-size: 1.2em; }
-        
-        .card {
-            background: white; border-radius: var(--border-radius);
-            box-shadow: var(--shadow); transition: var(--transition); overflow: hidden;
-        }
-        .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
-        
-        .stats-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px; margin-bottom: 30px;
-        }
-        .stat-card {
-            padding: 30px; text-align: center; position: relative; overflow: hidden;
-        }
-        .stat-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--info-color));
-        }
-        .stat-icon {
-            font-size: 2.5em; margin-bottom: 15px; opacity: 0.1;
-            position: absolute; top: 20px; right: 20px;
-        }
-        .stat-value {
-            font-size: 2.8em; font-weight: 800; color: var(--primary-color);
-            margin-bottom: 10px; position: relative; z-index: 1;
-        }
-        .stat-label {
-            font-size: 1em; color: var(--light-text); font-weight: 600;
-            text-transform: uppercase; letter-spacing: 1px;
-        }
-        
-        .content-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px; margin-bottom: 30px;
-        }
-        .content-section { padding: 25px; }
-        .section-title {
-            font-size: 1.4em; font-weight: 700; margin-bottom: 20px; color: var(--dark-text);
-            border-bottom: 3px solid var(--primary-color); padding-bottom: 10px;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .section-title::before { content: attr(data-icon); font-size: 1.2em; }
-        
-        .store-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 0; border-bottom: 1px solid var(--border-color); transition: var(--transition);
-        }
-        .store-item:hover { background: var(--light-bg); padding-left: 10px; border-radius: 8px; }
-        .store-item:last-child { border-bottom: none; }
-        .store-rank {
-            font-weight: 800; font-size: 1.2em; color: var(--primary-color);
-            min-width: 40px; height: 40px; display: flex; align-items: center;
-            justify-content: center; background: rgba(0, 122, 255, 0.1);
-            border-radius: 50%; margin-right: 15px;
-        }
-        .store-name { flex: 1; font-weight: 600; font-size: 1.1em; }
-        .store-participation {
-            font-size: 1em; color: var(--light-text); font-weight: 700;
-            background: var(--light-bg); padding: 5px 12px; border-radius: 20px; margin-right: 10px;
-        }
-        .store-movement {
-            font-size: 1.2em; font-weight: 800; min-width: 60px; text-align: center;
-            padding: 5px 10px; border-radius: 20px;
-        }
-        
-        .movement-up { color: var(--success-color); background: rgba(40, 167, 69, 0.1); }
-        .movement-down { color: var(--danger-color); background: rgba(220, 53, 69, 0.1); }
-        .movement-new { color: var(--info-color); background: rgba(23, 162, 184, 0.1); }
-        .movement-same { color: var(--light-text); background: var(--light-bg); }
-        
-        .table-section { padding: 25px; overflow-x: auto; }
-        .league-table {
-            width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.95em;
-        }
-        .league-table th {
-            background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
-            color: white; padding: 15px 12px; text-align: left; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1px; position: sticky;
-            top: 0; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .league-table td {
-            padding: 12px; border-bottom: 1px solid var(--border-color); transition: var(--transition);
-        }
-        .league-table tbody tr:hover {
-            background: var(--light-bg); transform: scale(1.01); box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .rank-cell {
-            font-weight: 800; text-align: center; width: 80px;
-            font-size: 1.1em; color: var(--primary-color);
-        }
-        .participation-cell { text-align: center; font-weight: 700; width: 120px; }
-        .movement-cell { text-align: center; font-weight: 800; width: 100px; }
-        
-        /* Average highlighting */
-        .average-store {
-            background: linear-gradient(45deg, #fff3cd, #ffeaa7) !important;
-            font-weight: 700; border-top: 3px solid var(--warning-color);
-            border-bottom: 3px solid var(--warning-color);
-        }
-        .below-north-west-average {
-            background: rgba(255, 193, 7, 0.15) !important; border-left: 4px solid #ff9800;
-        }
-        .below-north-average {
-            background: rgba(255, 193, 203, 0.4) !important; border-left: 4px solid #e91e63;
-        }
-        .below-north-west-average .rank-cell {
-            background: #ff9800; color: white; border-radius: 50%; border: 3px solid #ff9800;
-            width: 35px; height: 35px; display: flex; align-items: center;
-            justify-content: center; margin: 0 auto; font-size: 1em; font-weight: 800;
-        }
-        .below-north-average .rank-cell {
-            background: #e91e63; color: white; border-radius: 50%; border: 3px solid #e91e63;
-            width: 35px; height: 35px; display: flex; align-items: center;
-            justify-content: center; margin: 0 auto; font-size: 1em; font-weight: 800;
-        }
-        .average-divider { position: relative; }
-        .average-divider::after {
-            content: 'AVERAGE LINE'; position: absolute; right: 10px; top: 50%;
-            transform: translateY(-50%); background: var(--warning-color); color: #000;
-            padding: 4px 10px; font-size: 0.7em; font-weight: 800;
-            border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .no-data {
-            text-align: center; color: var(--light-text); font-style: italic;
-            padding: 40px; font-size: 1.1em;
-        }
-        
-        .generation-info {
-            background: var(--info-color); color: white; padding: 15px;
-            border-radius: var(--border-radius); margin-bottom: 25px; text-align: center;
-            font-weight: 600;
-        }
-        
-        @media (max-width: 1200px) { .content-grid { grid-template-columns: 1fr; } }
-        @media (max-width: 768px) {
-            .container { padding: 15px; }
-            .header h1 { font-size: 2.2em; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .content-grid { gap: 15px; }
-        }
-        @media (max-width: 480px) {
-            .stats-grid { grid-template-columns: 1fr; }
-            .store-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .store-rank { align-self: flex-start; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Store League Table Dashboard<span class="version-badge">Standalone</span></h1>
-            <p class="subtitle">Complete Performance Report</p>
-        </div>
-        
-        <div class="generation-info">
-            📧 <strong>Standalone Version</strong> - Generated on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}
-            | Total Stores: ${currentData.length} | Data Source: ${uploadHistory[uploadHistory.length - 1]?.fileName || 'Demo Data'}
-        </div>
-
-        <!-- Statistics Cards -->
-        <div class="stats-grid">
-            <div class="card stat-card">
-                <div class="stat-icon">🏪</div>
-                <div class="stat-value">${currentData.length}</div>
-                <div class="stat-label">Total Stores</div>
-            </div>
-            <div class="card stat-card">
-                <div class="stat-icon">📊</div>
-                <div class="stat-value">${(currentData.reduce((sum, s) => sum + s.participation, 0) / currentData.length).toFixed(1)}%</div>
-                <div class="stat-label">Average Participation</div>
-            </div>
-            <div class="card stat-card">
-                <div class="stat-icon">🏆</div>
-                <div class="stat-value" style="font-size: 1.8em; line-height: 1.2;">${currentData[0].store}<br><small style="color: var(--primary-color); font-weight: 600;">${currentData[0].participation.toFixed(1)}%</small></div>
-                <div class="stat-label">Top Performing Store</div>
-            </div>
-            <div class="card stat-card">
-                <div class="stat-icon">📅</div>
-                <div class="stat-value">${new Date().toLocaleDateString()}</div>
-                <div class="stat-label">Report Date</div>
-            </div>
-            <div class="card stat-card">
-                <div class="stat-icon">⭐</div>
-                <div class="stat-value">${currentData.filter(s => s.participation > (currentData.reduce((sum, s) => sum + s.participation, 0) / currentData.length)).length}</div>
-                <div class="stat-label">Above Average</div>
-            </div>
-        </div>
-
-        <!-- Content Sections -->
-        <div class="content-grid">
-            <div class="card content-section">
-                <h3 class="section-title" data-icon="🥇">Top 5 Stores</h3>
-                <div>
-                    ${currentData.slice(0, 5).map(store => `
-                        <div class="store-item">
-                            <div class="store-rank">#${store.rank}</div>
-                            <div class="store-name">${store.store}</div>
-                            <div class="store-participation">${store.participation.toFixed(1)}%</div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-
-            <div class="card content-section">
-                <h3 class="section-title" data-icon="📉">Bottom 5 Stores</h3>
-                <div>
-                    ${currentData.slice(-5).reverse().map(store => `
-                        <div class="store-item">
-                            <div class="store-rank">#${store.rank}</div>
-                            <div class="store-name">${store.store}</div>
-                            <div class="store-participation">${store.participation.toFixed(1)}%</div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-
-            <div class="card content-section">
-                <h3 class="section-title" data-icon="🚀">Biggest Movers</h3>
-                <div>
-                    ${(() => {
-                        const movers = currentData.filter(s => s.movement !== 'NEW' && s.movement !== 0)
-                            .sort((a, b) => Math.abs(b.movement) - Math.abs(a.movement))
-                            .slice(0, 5);
-                        return movers.length > 0 ? movers.map(store => `
-                            <div class="store-item">
-                                <div class="store-rank">#${store.rank}</div>
-                                <div class="store-name">${store.store}</div>
-                                <div class="store-participation">${store.participation.toFixed(1)}%</div>
-                                <div class="store-movement ${store.movement > 0 ? 'movement-up' : 'movement-down'}">
-                                    ${store.movement > 0 ? '⬆️' : '⬇️'} ${Math.abs(store.movement)}
-                                </div>
-                            </div>
-                        `).join('') : '<div class="no-data">No movement data available</div>';
-                    })()}
-                </div>
-            </div>
-        </div>
-
-        <!-- Main League Table -->
-        <div class="card table-section">
-            <h3 class="section-title" data-icon="📋">Complete League Table</h3>
-            <div style="overflow-x: auto;">
-                <table class="league-table">
-                    <thead>
-                        <tr>
-                            <th class="rank-cell">Rank</th>
-                            <th>Store Name</th>
-                            <th class="participation-cell">Participation %</th>
-                            <th class="movement-cell">Movement</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${currentData.map((store, index) => {
-                            // Find average store positions
-                            const northWestAverageIndex = currentData.findIndex(s => 
-                                s.store.toUpperCase().includes('NORTH WEST AVERAGE') ||
-                                (s.store.toUpperCase().includes('NORTH WEST') && s.store.toUpperCase().includes('AVERAGE'))
-                            );
-                            const northAverageIndex = currentData.findIndex(s => 
-                                s.store.toUpperCase().includes('NORTH AVERAGE') &&
-                                !s.store.toUpperCase().includes('NORTH WEST')
-                            );
-                            
-                            // Determine row class
-                            let rowClass = '';
-                            const isNorthWestAverage = store.store.toUpperCase().includes('NORTH WEST AVERAGE') ||
-                                (store.store.toUpperCase().includes('NORTH WEST') && store.store.toUpperCase().includes('AVERAGE'));
-                            const isNorthAverage = store.store.toUpperCase().includes('NORTH AVERAGE') &&
-                                !store.store.toUpperCase().includes('NORTH WEST');
-                            
-                            if (isNorthWestAverage || isNorthAverage) {
-                                rowClass = 'average-store average-divider';
-                            } else {
-                                const belowNorthWestAverage = northWestAverageIndex !== -1 && index > northWestAverageIndex;
-                                const belowNorthAverage = northAverageIndex !== -1 && index > northAverageIndex;
-                                
-                                if (belowNorthAverage) {
-                                    rowClass = 'below-north-average';
-                                } else if (belowNorthWestAverage) {
-                                    rowClass = 'below-north-west-average';
-                                }
-                            }
-                            
-                            // Movement display
-                            let movementDisplay = '';
-                            if (store.movement === 'NEW') movementDisplay = '<span title="New Entry">🆕 NEW</span>';
-                            else if (store.movement === 0) movementDisplay = '<span title="No Change">➖</span>';
-                            else if (store.movement > 0) movementDisplay = `<span title="Moved up ${store.movement} positions">⬆️ ${store.movement}</span>`;
-                            else movementDisplay = `<span title="Moved down ${Math.abs(store.movement)} positions">⬇️ ${Math.abs(store.movement)}</span>`;
-                            
-                            return `
-                                <tr class="${rowClass}">
-                                    <td class="rank-cell">${store.rank}</td>
-                                    <td class="store-cell">${store.store}</td>
-                                    <td class="participation-cell">${store.participation.toFixed(1)}%</td>
-                                    <td class="movement-cell">${movementDisplay}</td>
-                                </tr>
-                            `;
-                        }).join('')}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</body>
-</html>`;
-
-            // Download the standalone file
-            downloadFile(standaloneHTML, filename, 'text/html');
-            
-            // Show success message
-            setTimeout(() => {
-                alert(
-                    `📧 Standalone Version Created Successfully!\n\n` +
-                    `File: ${filename}\n` +
-                    `Total Stores: ${currentData.length}\n` +
-                    `File Size: ~${Math.round(standaloneHTML.length / 1024)} KB\n\n` +
-                    `This file contains:\n` +
-                    `• All current data embedded\n` +
-                    `• Complete styling & functionality\n` +
-                    `• No external dependencies\n` +
-                    `• Ready to email or share\n\n` +
-                    `The file has been downloaded to your Downloads folder.`
-                );
-            }, 100);
-        }
-
-        // Utility Functions
-        function downloadFile(content, fileName, contentType) {
-            const a = document.createElement('a');
-            const file = new Blob([content], { type: contentType });
-            a.href = URL.createObjectURL(file);
-            a.download = fileName;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(a.href);
-        }
-
-        // Keyboard Shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Admin access toggle (Option+A on Mac, Alt+A on PC)
-            if ((e.altKey || e.metaKey) && e.key.toLowerCase() === 'a') {
-                e.preventDefault();
-                toggleAdminMode();
-                return;
-            }
-            
-            if (e.ctrlKey || e.metaKey) {
-                switch (e.key) {
-                    case 'u':
-                        e.preventDefault();
-                        if (isAdminUser) document.getElementById('csvFile').click();
-                        break;
-                    case 'e':
-                        e.preventDefault();
-                        if (isAdminUser) exportData();
-                        break;
-                    case 'f':
-                        e.preventDefault();
-                        document.getElementById('searchFilter').focus();
-                        break;
-                }
-            }
-        });
-        
-        // Toggle Admin Mode
-        function toggleAdminMode() {
-            isAdminUser = !isAdminUser;
-            const uploadSection = document.getElementById('uploadSection');
-            const adminNotice = document.getElementById('adminNotice');
-            
-            if (isAdminUser) {
-                uploadSection.classList.add('show-admin');
-                adminNotice.style.display = 'block';
-                alert('🔓 Admin Mode Enabled!\n\nYou can now:\n• Upload CSV files\n• Export data\n• Generate standalone versions\n\nKeyboard shortcuts:\n• Cmd+U (Upload)\n• Cmd+E (Export)\n• Cmd+F (Search)');
-            } else {
-                uploadSection.classList.remove('show-admin');
-                adminNotice.style.display = 'none';
-                alert('🔒 Admin Mode Disabled');
-            }
-        }
-
-        // Auto-save every 30 seconds
-        setInterval(() => {
-            if (currentData.length > 0) {
-                saveDataToStorage();
-            }
-        }, 30000);
-
-        console.log('🚀 League Table Dashboard v2.0 Loaded Successfully!');
-        console.log('💡 Keyboard shortcuts:');
-        console.log('  • Option+A / Alt+A: Toggle Admin Mode');
-        console.log('  • Cmd+U / Ctrl+U: Upload CSV (Admin)');
-        console.log('  • Cmd+E / Ctrl+E: Export Data (Admin)');
-        console.log('  • Cmd+F / Ctrl+F: Focus Search');
-        console.log('📊 Current data loaded:', currentData.length, 'stores');
-        console.log('🔧 Admin mode:', isAdminUser ? 'Enabled' : 'Disabled');
-
-        // Auto-Embed Current Data Function
-        function autoEmbedCurrentData() {
-            if (!isAdminUser) {
-                alert('Admin access required to embed data.');
-                return;
-            }
-            
-            if (currentData.length === 0) {
-                alert('No data currently loaded in dashboard.\n\nPlease:\n1. Upload a CSV file, or\n2. Load data from URL, or\n3. Import JSON data\n\nThen try the Auto-Embed feature.');
-                return;
-            }
-            
-            if (!confirm(`🔧 Auto-Embed Current Data\n\nThis will embed the current dashboard data (${currentData.length} stores) directly into the HTML file for permanent storage.\n\nBenefits:\n• Data will load instantly on page refresh\n• No need to re-upload files\n• Works offline\n\nClick OK to proceed with embedding.`)) {
-                return;
-            }
-            
-            try {
-                console.log('🔧 Starting auto-embed process...');
-                
-                // Create comprehensive JSON data structure
-                const jsonData = {
-                    metadata: {
-                        exportDate: new Date().toISOString(),
-                        exportTime: new Date().toLocaleString(),
-                        totalStores: currentData.length,
-                        dataSource: uploadHistory[uploadHistory.length - 1]?.fileName || 'Dashboard Data',
-                        averageParticipation: currentData.length > 0 
-                            ? (currentData.reduce((sum, s) => sum + s.participation, 0) / currentData.length).toFixed(1)
-                            : '0',
-                        version: 'v2.0',
-                        autoEmbedded: true,
-                        embedTime: new Date().toLocaleString()
-                    },
-                    stores: currentData.map(store => ({
-                        rank: store.rank,
-                        store: store.store,
-                        participation: store.participation,
-                        movement: store.movement,
-                        previousRank: store.previousRank,
-                        area: {
-                            code: store.area.code,
-                            number: store.area.number,
-                            display: store.area.display
-                        },
-                        areaCode: store.area.code
-                    })),
-                    previousData: previousData.map(store => ({
-                        store: store.store,
-                        participation: store.participation,
-                        areaCode: store.areaCode || null
-                    })),
-                    uploadHistory: uploadHistory,
-                    statistics: {
-                        topStore: currentData[0],
-                        bottomStore: currentData[currentData.length - 1],
-                        aboveAverageCount: currentData.filter(s => s.participation > (currentData.reduce((sum, s) => sum + s.participation, 0) / currentData.length)).length,
-                        availableAreas: [...new Set(currentData.map(s => s.area.code))].filter(code => code !== 'UNKNOWN').sort(),
-                        biggestMovers: currentData
-                            .filter(s => s.movement !== 'NEW' && s.movement !== 0)
-                            .sort((a, b) => Math.abs(b.movement) - Math.abs(a.movement))
-                            .slice(0, 5)
-                    }
-                };
-                
-                // Create downloadable file for user to manually update
-                const timestamp = new Date().toISOString().split('T')[0];
-                const filename = `auto_embed_data_${timestamp}.json`;
-                const jsonContent = JSON.stringify(jsonData, null, 2);
-                
-                // Download the JSON file
-                downloadFile(jsonContent, filename, 'application/json');
-                
-                // Show instructions
-                setTimeout(() => {
-                    alert(`🎉 Auto-Embed Data Generated!\n\n` +
-                          `📄 File Downloaded: ${filename}\n` +
-                          `📊 Stores: ${currentData.length}\n` +
-                          `🕒 Generated: ${new Date().toLocaleString()}\n\n` +
-                          `📋 Next Steps:\n` +
-                          `1. Find the downloaded ${filename} file\n` +
-                          `2. Run the update script:\n` +
-                          `   python3 update_dashboard.py "~/Downloads/${filename}"\n\n` +
-                          `OR use the Quick Update button below for automated embedding!`);
-                    
-                    // Show quick update option
-                    if (confirm('🚀 Quick Update Available!\n\nWould you like to automatically run the embed script now?\n\n(This will update the HTML file immediately)')) {
-                        quickEmbedFromGenerated(filename, jsonData);
-                    }
-                }, 200);
-                
-            } catch (error) {
-                console.error('❌ Auto-embed error:', error);
-                alert(`❌ Error during auto-embed: ${error.message}`);
-            }
-        }
-        
-        // Quick Embed Function (simulates the Python script)
-        function quickEmbedFromGenerated(filename, jsonData) {
-            try {
-                console.log('⚡ Running quick embed...');
-                
-                // Update the embedded data variable (this simulates what the Python script does)
-                window.EMBEDDED_LEAGUE_DATA = jsonData;
-                
-                // Save to localStorage as backup
-                localStorage.setItem('leagueTableEmbeddedBackup', JSON.stringify(jsonData));
-                
-                console.log('✅ Quick embed completed successfully!');
-                
-                alert(`✅ Quick Embed Successful!\n\n` +
-                      `🔄 The data has been embedded in memory.\n` +
-                      `📋 To make it permanent:\n\n` +
-                      `1. Use the downloaded ${filename}\n` +
-                      `2. Run: python3 update_dashboard.py\n\n` +
-                      `💾 Temporary embed is active for this session!`);
-                
-            } catch (error) {
-                console.error('❌ Quick embed error:', error);
-                alert(`❌ Quick embed failed: ${error.message}`);
-            }
-        }
-        
-        // Show Embed Instructions Function
-        function showEmbedInstructions() {
-            const instructions = `📋 Auto-Embed Instructions\n` +
-                               `==========================\n\n` +
-                               `🎯 Purpose:\n` +
-                               `The Auto-Embed feature saves your current dashboard data directly into the HTML file, so it loads instantly every time you open the dashboard.\n\n` +
-                               `🔄 How It Works:\n` +
-                               `1. Click "🔧 Auto-Embed Current Data"\n` +
-                               `2. System generates a JSON file with your data\n` +
-                               `3. Choose Quick Update for instant embedding\n` +
-                               `4. Or use the Python script for permanent embedding\n\n` +
-                               `⚡ Quick Update vs Permanent:\n` +
-                               `• Quick: Works for current browser session\n` +
-                               `• Permanent: Updates the actual HTML file\n\n` +
-                               `🔧 Manual Method:\n` +
-                               `If auto-embed doesn’t work, you can always:\n` +
-                               `1. Export JSON data from admin controls\n` +
-                               `2. Run: python3 update_dashboard.py [file.json]\n` +
-                               `3. This guarantees permanent embedding\n\n` +
-                               `🔑 Requirements:\n` +
-                               `• Admin mode must be enabled\n` +
-                               `• Data must be loaded in dashboard\n` +
-                               `• Modern browser for best results`;
-            
-            alert(instructions);
-        }
-        
-        // Load Embedded Data Function
-        function loadEmbeddedData(showAlert = true) {
-            console.log('📋 Loading embedded data...');
-            
-            try {
-                // Clear existing data
-                previousData = [...allStoreData];
-                
-                // Load from embedded JSON
-                const embeddedData = window.EMBEDDED_LEAGUE_DATA;
-                if (!embeddedData || !embeddedData.stores) {
-                    throw new Error('No embedded data found');
-                }
-                
-                console.log('✅ Embedded data found:', embeddedData.metadata);
-                
-                // Convert embedded data to internal format
-                allStoreData = embeddedData.stores.map(store => {
-                    let movement = 'NEW';
-                    if (store.movement !== undefined && store.movement !== null) {
-                        if (typeof store.movement === 'string') {
-                            if (store.movement === '0' || store.movement === 0) {
-                                movement = 0;
-                            } else if (store.movement.startsWith('+')) {
-                                movement = parseInt(store.movement.substring(1));
-                            } else if (store.movement.startsWith('-')) {
-                                movement = -parseInt(store.movement.substring(1));
-                            } else if (!isNaN(parseInt(store.movement))) {
-                                movement = parseInt(store.movement);
-                            }
-                        } else if (typeof store.movement === 'number') {
-                            movement = store.movement;
-                        }
-                    } else if (store.previousRank && store.rank) {
-                        movement = store.previousRank - store.rank;
-                    }
-                    
-                    return {
-                        store: store.store,
-                        participation: store.participation || 0,
-                        rank: store.rank || 0,
-                        movement: movement,
-                        previousRank: store.previousRank || null,
-                        area: store.area || { code: 'UNKNOWN', number: 0, display: 'Unknown' }
-                    };
-                });
-                
-                // Add to upload history
-                uploadHistory.push({
-                    fileName: 'Embedded Data (Local)',
-                    uploadTime: embeddedData.metadata ? embeddedData.metadata.exportTime : new Date().toLocaleString(),
-                    recordCount: allStoreData.length,
-                    source: 'Embedded'
-                });
-                
-                // Process and display data
-                processData();
-                saveDataToStorage();
-                
-                // Show success message
-                const movedUp = allStoreData.filter(s => typeof s.movement === 'number' && s.movement > 0).length;
-                const movedDown = allStoreData.filter(s => typeof s.movement === 'number' && s.movement < 0).length;
-                const stayedSame = allStoreData.filter(s => s.movement === 0).length;
-                const newStores = allStoreData.filter(s => s.movement === 'NEW').length;
-                
-                console.log(`✅ Embedded data loaded: ${allStoreData.length} stores from ${embeddedData.metadata ? embeddedData.metadata.dataSource : 'Unknown'}`);
-                
-                if (showAlert) {
-                    alert(`✅ Embedded data loaded successfully!\n\n` +
-                          `📊 Stores loaded: ${allStoreData.length}\n` +
-                          `📊 Source: ${embeddedData.metadata ? embeddedData.metadata.dataSource : 'Unknown'}\n` +
-                          `📊 Export Time: ${embeddedData.metadata ? embeddedData.metadata.exportTime : 'Unknown'}\n` +
-                          `📊 Average: ${embeddedData.metadata ? embeddedData.metadata.averageParticipation + '%' : 'Unknown'}\n\n` +
-                          `📈 Movement Summary:\n` +
-                          `🔺 Moved Up: ${movedUp}\n` +
-                          `🔻 Moved Down: ${movedDown}\n` +
-                          `➖ Stayed Same: ${stayedSame}\n` +
-                          `🆕 New Stores: ${newStores}\n\n` +
-                          `💻 Loaded from embedded data!`);
-                }
-                
-            } catch (error) {
-                console.error('❌ Error loading embedded data:', error);
-                alert(`❌ Error loading embedded data: ${error.message}`);
-            }
-        }
-    </script>
-
-    <!-- EMBEDDED JSON DATA - UPDATE THIS SECTION DAILY -->
-    <script>
-        // 📋 DAILY UPDATE SECTION - Replace the data below with your latest JSON
-        // Last updated: 16/09/2025, 09:44:54 PM (test.csv)
-        // 📋 DAILY UPDATE SECTION - Replace the data below with your latest JSON
-        // Last updated: 16/09/2025, 09:44:54 PM (test.csv)
-window.EMBEDDED_LEAGUE_DATA = {
-  "metadata": {
-    "exportDate": "16/09/2025",
-    "exportTime": "09:44:54 PM",
-    "totalStores": 2,
-    "dataSource": "test.csv",
-    "averageParticipation": "6.15",
-    "version": "v2.0"
-  },
-  "stores": [
-    {
-      "rank": 1,
-      "store": "Store A",
-      "participation": 5.2,
-      "movement": 0,
-      "area": "",
-      "previous_rank": 1
-    },
-    {
-      "rank": 2,
-      "store": "Store B",
-      "participation": 7.1,
-      "movement": 0,
-      "area": "",
-      "previous_rank": 2
-    }
-  ]
-};
-// ℹ️ TO UPDATE WITH NEW DATA:
-        // 1. Replace the entire EMBEDDED_LEAGUE_DATA object above with your new JSON
-        // 2. Update the comment with the new date and source file
-        // 3. The "📋 Load Embedded Data" button will load this data instantly
     </script>
 </body>
 </html>
